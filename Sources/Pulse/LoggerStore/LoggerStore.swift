@@ -210,7 +210,9 @@ public final class LoggerStore: @unchecked Sendable, Identifiable {
 
         if !isArchive && !options.contains(.readonly) {
             try save(manifest)
-            sweepIfNeeded()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) { [weak self] in
+              self?.sweepIfNeeded()
+            }
         }
     }
 
@@ -1077,9 +1079,7 @@ extension LoggerStore {
 extension LoggerStore {
     public func sweepIfNeeded() {
         guard isAutomaticSweepNeeded else { return }
-        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(10)) { [weak self] in
-            self?.sweep()
-        }
+        sweep()
     }
 
     var isAutomaticSweepNeeded: Bool {
