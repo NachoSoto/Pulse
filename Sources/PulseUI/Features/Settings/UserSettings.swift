@@ -10,20 +10,21 @@ import Combine
 public final class UserSettings: ObservableObject {
     public static let shared = UserSettings()
 
+    // Keep AppStorage keys dot-free so SwiftUI can observe each setting individually.
     /// The console default mode.
-    @AppStorage("com.github.kean.pulse.console.mode")
+    @AppStorage("com_github_kean_pulse_console_mode")
     public var mode: ConsoleMode = .network
 
     /// The line limit for messages in the console. By default, `3`.
-    @AppStorage("com.github.kean.pulse.console.cell.line.limit")
+    @AppStorage("com_github_kean_pulse_console_cell_line_limit")
     public var lineLimit: Int = 3
 
     /// Enables link detection in the response viewier. By default, `false`.
-    @AppStorage("com.github.kean.pulse.link.detection")
+    @AppStorage("com_github_kean_pulse_link_detection")
     public var isLinkDetectionEnabled = false
 
     /// The default sharing output type. By default, ``ShareStoreOutput/store``.
-    @AppStorage("com.github.kean.pulse.sharing.output")
+    @AppStorage("com_github_kean_pulse_sharing_output")
     public var sharingOutput: ShareStoreOutput = .store
 
     /// HTTP headers to display in a Console. By default, empty.
@@ -38,11 +39,11 @@ public final class UserSettings: ObservableObject {
         }
     }
 
-    @AppStorage("com.github.kean.pulse.display.headers")
+    @AppStorage("com_github_kean_pulse_display_headers")
     var rawDisplayHeaders: String = "[]"
 
     /// If `true`, the network inspector will show the current request by default.
     /// If `false`, show the original request.
-    @AppStorage("com.github.kean.pulse.show-current-request")
+    @AppStorage("com_github_kean_pulse_show_current_request")
     public var isShowingCurrentRequest = true
 }
